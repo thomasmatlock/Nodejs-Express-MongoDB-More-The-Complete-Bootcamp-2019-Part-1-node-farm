@@ -1,0 +1,4 @@
+- ctrl 1/2/3 = focus panels 1/2/3
+- ctrl shift l = select all remaining occurences in file
+- ctrl j = toggle panel
+- ctrl alt D = add next occurence to selection
