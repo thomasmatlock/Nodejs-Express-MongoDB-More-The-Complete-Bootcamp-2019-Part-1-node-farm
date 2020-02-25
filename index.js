@@ -1,7 +1,8 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
-const replaceTemplate = require('./modules/replaceTemplate')
+const replaceTemplate = require("./modules/replaceTemplate");
+
 ////////////////////////
 // FILES
 
@@ -35,7 +36,6 @@ const replaceTemplate = require('./modules/replaceTemplate')
 ///////////////////////
 // SERVER
 
-
 // SYNC
 const tempOverview = fs.readFileSync(
 	`${__dirname}/templates/template-overview.html`,
@@ -57,10 +57,7 @@ const dataObj = JSON.parse(data);
 const server = http.createServer((req, res) => {
 	// console.log(req.url); // this is anything following the port or slash
 	// console.log(url.parse(req.url, true)); // this parses the url into an obj, must say true for it to do so// querystring is any part of URL starting with ? and following it
-	const {
-		query,
-		pathname
-	} = url.parse(req.url, true)
+	const { query, pathname } = url.parse(req.url, true);
 	// console.log(query.id, pathname);
 
 	// const pathname = req.url;
@@ -74,12 +71,10 @@ const server = http.createServer((req, res) => {
 		// loop through each el in our json file, calling a function for each one
 		// pass it templateCard, and the json element, basically the placeholder html, and the json values we want to insert into it
 		// this creates an array which we combine into one string with .join
-		const cardsHTML = dataObj.map(el => replaceTemplate(tempCard, el)).join('');
+		const cardsHTML = dataObj.map(el => replaceTemplate(tempCard, el)).join("");
 		// console.log(cardsHTML);
-		const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHTML); // replaces placeholder with updated html that contains replaced placholders
+		const output = tempOverview.replace("{%PRODUCT_CARDS%}", cardsHTML); // replaces placeholder with updated html that contains replaced placholders
 		// change cardsHTML from array to big string
-
-
 
 		res.end(output);
 
