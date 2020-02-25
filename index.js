@@ -1,7 +1,7 @@
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
-
+const replaceTemplate = require('./modules/replaceTemplate')
 ////////////////////////
 // FILES
 
@@ -35,23 +35,6 @@ const url = require("url");
 ///////////////////////
 // SERVER
 
-const replaceTemplate = (temp, product) => {
-	// template gets searched for strings and replaced with the json element values
-	// console.log(product);
-	
-	let output = temp.replace(/{%PRODUCTNAME}/g, product.productName); // replaces all placeholders in template with actual dataObj values. Use regex to find all instances matching ${PRODUCTNAME}
-	output = output.replace(/{%IMAGE}/g, product.image);
-	output = output.replace(/{%PRICE}/g, product.price);
-	output = output.replace(/{%FROM}/g, product.from);
-	output = output.replace(/{%NUTRIENTS}/g, product.nutrients);
-	output = output.replace(/{%QUANTITY}/g, product.quantity);
-	output = output.replace(/{%DESCRIPTION}/g, product.description);
-	output = output.replace(/{%ID}/g, product.id);
-	if (!product.organic) output = output = output.replace(/{%NOT_ORGANIC}/g, 'not-organic');
-	// console.log(output);
-	
-	return output;
-};
 
 // SYNC
 const tempOverview = fs.readFileSync(
@@ -72,10 +55,18 @@ const dataObj = JSON.parse(data);
 
 // ASYNC
 const server = http.createServer((req, res) => {
-	const pathName = req.url;
+	// console.log(req.url); // this is anything following the port or slash
+	// console.log(url.parse(req.url, true)); // this parses the url into an obj, must say true for it to do so// querystring is any part of URL starting with ? and following it
+	const {
+		query,
+		pathname
+	} = url.parse(req.url, true)
+	// console.log(query.id, pathname);
+
+	// const pathname = req.url;
 
 	// Overview page
-	if (pathName === "/" || pathName === "/overview") {
+	if (pathname === "/" || pathname === "/overview") {
 		res.writeHead(200, {
 			"content-type": "text/html"
 		});
@@ -88,16 +79,22 @@ const server = http.createServer((req, res) => {
 		const output = tempOverview.replace('{%PRODUCT_CARDS%}', cardsHTML); // replaces placeholder with updated html that contains replaced placholders
 		// change cardsHTML from array to big string
 
-		
+
 
 		res.end(output);
 
 		// Product page
-	} else if (pathName === "/product") {
-		res.end("This is the PRODUCT page.");
+	} else if (pathname === "/product") {
+		res.writeHead(200, {
+			"content-type": "text/html"
+		});
+		const product = dataObj[query.id];
+		output = replaceTemplate(tempProduct, product);
+		// console.log(product);
+		res.end(output);
 
 		// API
-	} else if (pathName === "/api") {
+	} else if (pathname === "/api") {
 		res.writeHead(200, {
 			"content-type": "application/json"
 		});
