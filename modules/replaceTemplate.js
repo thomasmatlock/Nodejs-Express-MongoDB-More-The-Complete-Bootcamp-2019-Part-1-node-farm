@@ -1,6 +1,6 @@
 module.exports = replaceTemplate = (template, product) => {
 	// template gets searched for strings and replaced with the json element values
-	// console.log(product);
+	console.log(product)
 
 	let output = template.replace(/{%PRODUCTNAME}/g, product.productName); // replaces all placeholders in template with actual dataObj values. Use regex to find all instances matching ${PRODUCTNAME}
 	output = output.replace(/{%IMAGE}/g, product.image);
