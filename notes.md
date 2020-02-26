@@ -11,3 +11,14 @@
     - to use local npm packages, you add a script to run them
     - global npm packages dont need a script, they just can run from the terminal
   - slugify, much more readable urls
+- Semantic versioning (semver)
+  - version 1.18.11
+    - major, minor, and patch
+    - major version 1, minor version 18, patch 11 (patching bugs in minor version)
+    - minor versions introduce some new features into package, but no breaking changes
+    - npm install slugify@1.0.0 // installs this version
+      Symbols preceding version number
+    - - will accept patch, minor, AND major update releases
+    - ^ will accept patch and minor releases
+    - ~ will accept only patch releases, if we use this, update will only update bug fixes/patches, no minor/major changes (safest)
+    - use npm update slugify, will

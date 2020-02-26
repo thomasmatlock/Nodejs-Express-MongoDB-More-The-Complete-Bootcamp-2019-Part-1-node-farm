@@ -1,3 +1,5 @@
+// REQUIRES
+// usually require core modules first, then 3rd party modules, then our own last
 const fs = require("fs");
 const http = require("http");
 const url = require("url");
@@ -37,7 +39,7 @@ const replaceTemplate = require("./modules/replaceTemplate");
 ///////////////////////
 // SERVER
 
-// SYNC (single use on startup)
+// SYNC
 const tempOverview = fs.readFileSync(
 	`${__dirname}/templates/template-overview.html`,
 	"utf-8"
@@ -53,17 +55,8 @@ const tempProduct = fs.readFileSync(
 
 const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
 const dataObj = JSON.parse(data);
-// console.log(dataObj);
-// console.log(slugify(dataObj[1].productName, { lower: true }));
 
-const slugs = dataObj.map(el => slugify(el.productName, {
-	lower: true
-})); // map runs through obj and returns 
-console.log(slugs);
-
-
-
-// ASYNC (multi use after startup, to be used indefinitely)
+// ASYNC
 const server = http.createServer((req, res) => {
 	// console.log(req.url); // this is anything following the port or slash
 	// console.log(url.parse(req.url, true)); // this parses the url into an obj, must say true for it to do so// querystring is any part of URL starting with ? and following it
