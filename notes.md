@@ -1,24 +1,27 @@
-- ctrl 1/2/3 = focus panels 1/2/3
-- ctrl shift l = select all remaining occurences in file
-- ctrl j = toggle panel
-- ctrl alt D = add next occurence to selection
-- ctrl w close focused editor panel
-- npm
-  - nodemon autoreloads nodeservers
-    - good to have installed globally, you use it for all node projects
-    - anything installed in packagejson file is local only to your project
-    - any npm stuff you install globally, should not be necessary to install to your project folder
-    - to use local npm packages, you add a script to run them
-    - global npm packages dont need a script, they just can run from the terminal
-  - slugify, much more readable urls
-- Semantic versioning (semver)
-  - version 1.18.11
-    - major, minor, and patch
-    - major version 1, minor version 18, patch 11 (patching bugs in minor version)
-    - minor versions introduce some new features into package, but no breaking changes
-    - npm install slugify@1.0.0 // installs this version
-      Symbols preceding version number
-    - - will accept patch, minor, AND major update releases
-    - ^ will accept patch and minor releases
-    - ~ will accept only patch releases, if we use this, update will only update bug fixes/patches, no minor/major changes (safest)
-    - use npm update slugify, will
+-   ctrl 1/2/3 = focus panels 1/2/3
+-   ctrl shift l = select all remaining occurences in file
+-   ctrl j = toggle panel
+-   ctrl alt D = add next occurence to selection
+-   ctrl w close focused editor panel
+-   npm
+    -   nodemon autoreloads nodeservers
+        -   good to have installed globally, you use it for all node projects
+        -   anything installed in packagejson file is local only to your project
+        -   any npm stuff you install globally, should not be necessary to install to your project folder
+        -   to use local npm packages, you add a script to run them
+        -   global npm packages dont need a script, they just can run from the terminal
+    -   slugify, much more readable urls
+-   Semantic versioning (semver)
+    -   version 1.18.11
+        -   major, minor, and patch
+        -   major version 1, minor version 18, patch 11 (patching bugs in minor version)
+        -   minor versions introduce some new features into package, but no breaking changes
+        -   npm install slugify@1.0.0 // installs this version
+            Symbols preceding version number
+        -   -   will accept patch, minor, AND major update releases
+        -   ^ will accept patch and minor releases
+        -   ~ will accept only patch releases, if we use this, update will only update bug fixes/patches, no minor/major changes (safest)
+        -   use npm update slugify, will
+        -   node needs
+            -   v8 engine to compile to machine language
+            -   libuv, open source library with strong focus on async IO
