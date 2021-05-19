@@ -1,8 +1,3 @@
--   ctrl 1/2/3 = focus panels 1/2/3
--   ctrl shift l = select all remaining occurences in file
--   ctrl j = toggle panel
--   ctrl alt D = add next occurence to selection
--   ctrl w close focused editor panel
 -   npm
     -   nodemon autoreloads nodeservers
         -   good to have installed globally, you use it for all node projects
